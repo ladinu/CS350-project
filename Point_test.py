@@ -13,7 +13,7 @@ class PointTest(unittest.TestCase):
       self.assertEqual(p.x, 1)
       self.assertEqual(p.y, 3)
 
-   def testImutability(self):
+   def testImmutability(self):
       p = Point(4, 3)
       self.assertRaises(AttributeError, lambda: f(p))
       self.assertEqual(4, p.x)
