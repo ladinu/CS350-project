@@ -7,40 +7,32 @@ class Point(tuple):
    def __new__(cls, x=0, y=0):
       return tuple.__new__(cls, (x, y))
 
-   def getDistanceFrom(self, other):
-      return Distance.calculate(self, other)
-
-   def __eq__(self, other):
-      distanceOfSelf = self.getDistanceFrom(Point(0, 0))
-      distanceOfOther = other.getDistanceFrom(Point(0, 0))
-      return distanceOfSelf == distanceOfOther
-
-   def __ne__(self, other):
-      distanceOfSelf = self.getDistanceFrom(Point(0, 0))
-      distanceOfOther = other.getDistanceFrom(Point(0, 0))
-      return distanceOfSelf != distanceOfOther
-
-   def __lt__(self, other):
-      distanceOfSelf = self.getDistanceFrom(Point(0, 0))
-      distanceOfOther = other.getDistanceFrom(Point(0, 0))
-      return distanceOfSelf < distanceOfOther
-
-   def __le__(self, other):
-      distanceOfSelf = self.getDistanceFrom(Point(0, 0))
-      distanceOfOther = other.getDistanceFrom(Point(0, 0))
-      return distanceOfSelf <= distanceOfOther
-
-   def __gt__(self, other):
-      distanceOfSelf = self.getDistanceFrom(Point(0, 0))
-      distanceOfOther = other.getDistanceFrom(Point(0, 0))
-      return distanceOfSelf > distanceOfOther
-
-   def __ge__(self, other):
-      distanceOfSelf = self.getDistanceFrom(Point(0, 0))
-      distanceOfOther = other.getDistanceFrom(Point(0, 0))
-      return distanceOfSelf >= distanceOfOther
-
-
    x = property(itemgetter(0))
    y = property(itemgetter(1))
+
+
+   def __eq__(self, other):
+      return self._dist(self) == self._dist(other)
+
+   def __ne__(self, other):
+      return self._dist(self) != self._dist(other)
+
+   def __lt__(self, other):
+      return self._dist(self) < self._dist(other)
+
+   def __le__(self, other):
+      return self._dist(self) <= self._dist(other)
+
+   def __gt__(self, other):
+      return self._dist(self) > self._dist(other)
+
+   def __ge__(self, other):
+      return self._dist(self) >= self._dist(other)
+
+
+   def _dist(self, point):
+      return point.getDistanceFrom(Point(0, 0))
+
+   def getDistanceFrom(self, other):
+      return Distance.calculate(self, other)
 
