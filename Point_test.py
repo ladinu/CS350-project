@@ -20,7 +20,7 @@ class PointTest(unittest.TestCase):
       self.assertEqual(4, p.x)
       self.assertEqual(3, p.y)
 
-   def test_getDistance(self):
+   def testGetDistance(self):
       p = P(1, 1)
       self.assertEqual(sqrt(10), p.getDistanceFrom(P(2, 4)))
 
