@@ -26,6 +26,30 @@ class PointTest(unittest.TestCase):
 
    def testEq(self):
       self.assertEqual(P(1, 1), P(-1, -1))
+      self.assertEqual(P(1, 1), P(1, 1))
+
+   def testNe(self):
+      self.assertNotEqual(P(1, 2), P(-1, -1))
+
+   def testLt(self):
+      self.assertLess(P(1, 1), P(1, -2))
+
+   def testLe(self):
+      p1 = P(1, 1)
+      p2 = P(1, -2)
+      self.assertLessEqual(p1, p1)
+      self.assertLessEqual(p1, p2)
+
+   def testGt(self):
+      self.assertGreater(P(1, -2), P(1, 1))
+
+   def testGe(self):
+      p1 = P(1, -2)
+      p2 = P(1, 1)
+      self.assertGreaterEqual(p1, p2)
+      self.assertGreaterEqual(p2, p2)
+
+
 
 def f(p):
    p.x = 1
