@@ -49,6 +49,11 @@ class PointTest(unittest.TestCase):
       self.assertGreaterEqual(p1, p2)
       self.assertGreaterEqual(p2, p2)
 
+   def testIsLeftOf(self):
+      self.assertTrue(P(2, 0).isLeftOf(P(1, 1), P(3, 1)))
+
+   def testIsLeftOfSamePoint(self):
+      self.assertFalse(P(2, 1).isLeftOf(P(1, 1), P(3, 1)))
 
 
 def f(p):
