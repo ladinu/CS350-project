@@ -48,5 +48,5 @@ class Line(tuple):
    endPoint = property(itemgetter(1))
 
    def getDistance(self):
-      return utils.calculate(self.startPoint, self.endPoint)
+      return utils.calculateDistance(self.startPoint, self.endPoint)
 
