@@ -1,5 +1,5 @@
 from operator import itemgetter
-import Distance
+import GeometryUtils as utils
 
 class Point(tuple):
    __slots__ = []
@@ -48,5 +48,5 @@ class Line(tuple):
    endPoint = property(itemgetter(1))
 
    def getDistance(self):
-      return Distance.calculate(self.startPoint, self.endPoint)
+      return utils.calculate(self.startPoint, self.endPoint)
 

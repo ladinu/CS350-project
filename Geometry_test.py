@@ -91,6 +91,5 @@ class LineTest(unittest.TestCase):
       self.assertEqual(1, l.getDistance())
 
 
-
 if __name__ == '__main__':
    unittest.main()
