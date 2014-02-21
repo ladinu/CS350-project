@@ -1,6 +1,6 @@
 import unittest
 from PointUtils import *
-from Point import Point as P
+from Geometry import Point as P
 
 class PointUtilTest(unittest.TestCase):
 
@@ -53,7 +53,6 @@ class PointUtilTest(unittest.TestCase):
       bottomRight = bounds[1]
       self.assertTrue(P(-size, size) == topLeft)
       self.assertTrue(P(size, -size))
-
 
 
 if __name__ == '__main__':

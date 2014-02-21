@@ -1,4 +1,4 @@
-from Point import Point as P
+from Geometry import Point as P
 import random
 
 def getRandomPoint(low=0, high=10):
