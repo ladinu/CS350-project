@@ -42,9 +42,12 @@ class Point(tuple):
 class Line(tuple):
    __slots__ = []
 
-   def __new__(cls, startPoint=Point(), endPoint=Point()):
-      return tuple.__new__(cls, (startPoint, endPoint))
+   def __new__(cls, start=Point(), end=Point()):
+      return tuple.__new__(cls, (start, end))
 
-   start = property(itemgetter(0))
-   f = property(itemgetter(0))
+   startPoint = property(itemgetter(0))
+   endPoint = property(itemgetter(1))
+
+   def getDistance(self):
+      return Distance.calculate(self.startPoint, self.endPoint)
 
