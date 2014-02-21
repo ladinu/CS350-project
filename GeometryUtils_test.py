@@ -30,6 +30,12 @@ class DistanceTest(unittest.TestCase):
       p2 = P(1, 3)
       d = calculateDistance(p1, p2, MANHATTAN)
       self.assertEqual(3, d)
+
+   def test_getDeterminant(self):
+      p1 = P(1, 4)
+      p2 = P(4, 2)
+      p3 = P(0, 0)
+      self.assertTrue(-14, getDeterminant(p1, p2, p3))
       
 
 if __name__ == '__main__':

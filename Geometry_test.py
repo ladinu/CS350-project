@@ -59,6 +59,10 @@ class PointTest(unittest.TestCase):
       p2 = P(1, 4)
       self.assertTrue(P(1, 3).isCollinear(p1, p2))
 
+   def testToList(self):
+      p1 = P(4, 5)
+      self.assertEqual([4, 5], p1.toList())
+
 
 class LineTest(unittest.TestCase):
    
@@ -90,6 +94,11 @@ class LineTest(unittest.TestCase):
       l = Line(P(0, 0), P(0, 1))
       self.assertEqual(1, l.getDistance())
 
+   def testGetDeterminant(self):
+      l = Line(P(2, 2), P(3, 2))
+      self.assertEqual(0, l.getDeterminant(P(4, 2)))
+      self.assertLess(l.getDeterminant(P(3, 1)), 0)
+      self.assertGreater(l.getDeterminant(P(3, 3)), 0)
 
 if __name__ == '__main__':
    unittest.main()

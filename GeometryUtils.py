@@ -1,4 +1,5 @@
 from math import sqrt, fabs
+from numpy import linalg
 
 EUCLIDEAN = 0
 MANHATTAN = 1
@@ -23,3 +24,11 @@ def calculateManhattanDistance(p1, p2):
    x_diff = fabs(p1.x - p2.x)
    y_diff = fabs(p1.y - p2.y)
    return x_diff + y_diff
+
+def getDeterminant(p1, p2, p3):
+   matrix = [ p1.toList() + [1],
+              p2.toList() + [1],
+              p3.toList() + [1] ]
+
+   return linalg.det(matrix)
+
