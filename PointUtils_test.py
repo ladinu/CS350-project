@@ -17,7 +17,7 @@ class PointUtilTest(unittest.TestCase):
          self.between(p.y, low, high)
 
    def testGetRandomPoints(self):
-      points = getNRandomPoints()
+      points = getNRandomPoints(0)
       self.assertTrue(len(points) >= 0)
 
    def testGetRandomPoints1(self):
