@@ -1,7 +1,7 @@
 import unittest
 from math import sqrt
 from Geometry import Point as P
-from Geometry import Line as L
+from Geometry import Line
 
 class PointTest(unittest.TestCase):
 
@@ -54,32 +54,30 @@ class PointTest(unittest.TestCase):
       self.assertGreaterEqual(p1, p2)
       self.assertGreaterEqual(p2, p2)
 
-   @unittest.skip("check later")
-   def testIsLeftOf(self):
-      self.assertTrue(P(2, 0).isLeftOf(P(1, 1), P(3, 1)))
-
-   def testIsLeftOfSamePoint(self):
-      self.assertFalse(P(2, 1).isLeftOf(P(1, 1), P(3, 1)))
+   def testIsCollinear(self):
+      p1 = P(1, 1)
+      p2 = P(1, 4)
+      self.assertTrue(P(1, 3).isCollinear(p1, p2))
 
 
 class LineTest(unittest.TestCase):
    
    def testLine(self):
-      line = L()
+      line = Line()
       self.assertEqual(P(), line.startPoint)
       self.assertEqual(P(), line.endPoint)
 
    def testConstruct(self):
       p1 = P(1, 3)
       p2 = P(3, 3)
-      line = L(p1, p2)
+      line = Line(p1, p2)
       self.assertEqual(line.startPoint, p1)
       self.assertEqual(line.endPoint, p2)
 
    def testImmutability(self):
       p1 = P(1, 3)
       p2 = P(3, 3)
-      line = L(p1, p2)
+      line = Line(p1, p2)
       self.assertRaises(AttributeError, lambda: self.f(line))
 
    def f(self, line):
@@ -87,9 +85,9 @@ class LineTest(unittest.TestCase):
       line.endPoint = P(0, 1)
 
    def testGetDistance(self):
-      l = L()
+      l = Line()
       self.assertEqual(0, l.getDistance())
-      l = L(P(0, 0), P(0, 1))
+      l = Line(P(0, 0), P(0, 1))
       self.assertEqual(1, l.getDistance())
 
 

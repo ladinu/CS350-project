@@ -33,11 +33,10 @@ class Point(tuple):
    y = property(itemgetter(1))
 
    def getDistanceFrom(self, other):
-      return Distance.calculate(self, other)
+      return Line(self, other).getDistance()
 
-   def isLeftOf(self, a, b):
-      c = self
-      return ((b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x)) > 0;
+   def isCollinear(self, p1, p2):
+      return (0 == utils.getDeterminant(p1, p2))
 
 class Line(tuple):
    __slots__ = []
