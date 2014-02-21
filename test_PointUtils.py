@@ -1,12 +1,12 @@
 import unittest
 from PointUtils import *
-from Point import Point
+from Geometry import Point as P
 
 class PointUtilTest(unittest.TestCase):
 
    def testGetRandomPoint(self):
       p = getRandomPoint()
-      self.assertTrue(type(p) == Point)
+      self.assertTrue(type(p) == P)
 
    def testGetRandomPoint1(self):
       low = 0
@@ -17,7 +17,7 @@ class PointUtilTest(unittest.TestCase):
          self.between(p.y, low, high)
 
    def testGetRandomPoints(self):
-      points = getNRandomPoints()
+      points = getNRandomPoints(0)
       self.assertTrue(len(points) >= 0)
 
    def testGetRandomPoints1(self):
@@ -39,7 +39,20 @@ class PointUtilTest(unittest.TestCase):
       self.assertGreaterEqual(number, numLow)
       self.assertLessEqual(number, numHigh)
 
+   def testGetSquareEnclosingPoint(self):
+      bounds = getSquareEnclosingPoint(P(0, 0))
+      topLeft = bounds[0]
+      bottomRight = bounds[1]
+      self.assertTrue(P(-5, 5) == topLeft)
+      self.assertTrue(P(5, -5))
 
+   def testGetSquareEnclosingPoint(self):
+      size = 10
+      bounds = getSquareEnclosingPoint(P(0, 0), size)
+      topLeft = bounds[0]
+      bottomRight = bounds[1]
+      self.assertTrue(P(-size, size) == topLeft)
+      self.assertTrue(P(size, -size))
 
 
 if __name__ == '__main__':

@@ -1,10 +1,14 @@
-.PHONY: point-test
-point-test:
-	python Point_test.py
+.PHONY: geometry-test
+geometry-test:
+	python test_Geometry.py
+
+.PHONY: geometryUtils-test
+geometryUtils-test:
+	python test_GeometryUtils.py
 
 .PHONY: point-util-test
 point-util-test:
-	python PointUtils_test.py
+	python test_PointUtils.py
 
 .PHONY: clean
 clean:
