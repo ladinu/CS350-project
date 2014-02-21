@@ -1,5 +1,5 @@
 from operator import itemgetter
-import Distance
+import GeometryUtils as utils
 
 class Point(tuple):
    __slots__ = []
@@ -33,18 +33,27 @@ class Point(tuple):
    y = property(itemgetter(1))
 
    def getDistanceFrom(self, other):
-      return Distance.calculate(self, other)
+      return Line(self, other).getDistance()
 
-   def isLeftOf(self, a, b):
-      c = self
-      return ((b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x)) > 0;
+   def isCollinear(self, p1, p2):
+      return (0 == Line(p1, p2).getDeterminant(self))
+
+   def toList(self):
+      return [self.x, self.y]
 
 class Line(tuple):
    __slots__ = []
 
-   def __new__(cls, startPoint=Point(), endPoint=Point()):
-      return tuple.__new__(cls, (startPoint, endPoint))
+   def __new__(cls, start=Point(), end=Point()):
+      return tuple.__new__(cls, (start, end))
 
-   start = property(itemgetter(0))
-   f = property(itemgetter(0))
+   startPoint = property(itemgetter(0))
+   endPoint = property(itemgetter(1))
+
+   def getDistance(self):
+      return utils.calculateDistance(self.startPoint, self.endPoint)
+
+   def getDeterminant(self, point):
+      return utils.getDeterminant(self.startPoint, self.endPoint, point)
+
 
