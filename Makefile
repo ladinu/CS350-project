@@ -2,6 +2,10 @@
 geometry-test:
 	python Geometry_test.py
 
+.PHONY: geometryUtils-test
+geometryUtils-test:
+	python GeometryUtils_test.py
+
 .PHONY: point-printer-test
 point-printer-test:
 	python PointPrinter_test.py

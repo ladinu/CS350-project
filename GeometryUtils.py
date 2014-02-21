@@ -6,7 +6,7 @@ MANHATTAN = 1
 class DistanceException(Exception):
    pass
 
-def calculate(p1, p2, distanceType=EUCLIDEAN):
+def calculateDistance(p1, p2, distanceType=EUCLIDEAN):
    if distanceType == EUCLIDEAN:
       return calculateEuclideanDistance(p1, p2)
    elif distanceType == MANHATTAN:
