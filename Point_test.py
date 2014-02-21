@@ -1,6 +1,7 @@
 import unittest
 from math import sqrt
 from Point import Point as P
+from Point import Line as L
 
 class PointTest(unittest.TestCase):
 
@@ -49,12 +50,20 @@ class PointTest(unittest.TestCase):
       self.assertGreaterEqual(p1, p2)
       self.assertGreaterEqual(p2, p2)
 
+   @unittest.skip("check later")
    def testIsLeftOf(self):
       self.assertTrue(P(2, 0).isLeftOf(P(1, 1), P(3, 1)))
 
    def testIsLeftOfSamePoint(self):
       self.assertFalse(P(2, 1).isLeftOf(P(1, 1), P(3, 1)))
 
+
+class LineTest(unittest.TestCase):
+   
+   def testLine(self):
+      line = L()
+      self.assertEqual(P(), line.startPoint)
+      self.assertEqual(P(), line.endPoint)
 
 def f(p):
    p.x = 1

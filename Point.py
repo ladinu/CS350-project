@@ -7,7 +7,6 @@ class Point(tuple):
    def __new__(cls, x=0, y=0):
       return tuple.__new__(cls, (x, y))
 
-
    def __eq__(self, other):
       return self._dist(self) == self._dist(other)
 
@@ -36,7 +35,16 @@ class Point(tuple):
    def getDistanceFrom(self, other):
       return Distance.calculate(self, other)
 
-   #def isLeftOf(self, a, b):
-   #   c = self
-   #   return ((b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x)) > 0;      
+   def isLeftOf(self, a, b):
+      c = self
+      return ((b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x)) > 0;
+
+class Line(tuple):
+   __slots__ = []
+
+   def __new__(cls, startPoint=Point(), endPoint=Point()):
+      return tuple.__new__(cls, (startPoint, endPoint))
+
+   start = property(itemgetter(0))
+   f = property(itemgetter(0))
 
