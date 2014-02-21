@@ -1,6 +1,6 @@
-.PHONY: point-test
-point-test:
-	python Point_test.py
+.PHONY: geometry-test
+geometry-test:
+	python Geometry_test.py
 
 .PHONY: point-printer-test
 point-printer-test:
