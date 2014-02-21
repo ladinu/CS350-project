@@ -8,7 +8,7 @@ def getRandomPoint(low=0, high=10):
 
 def getNRandomPoints(n=10, low=0, high=10):
    points = []
-   assert(n >=0)
+   assert(n >= 0)
    for i in range(n):
       points.append(getRandomPoint(low, high))
    return points
