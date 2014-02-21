@@ -56,4 +56,7 @@ class Line(tuple):
    def getDeterminant(self, point):
       return utils.getDeterminant(self.startPoint, self.endPoint, point)
 
+   def isPoint(self):
+      return self.getDistance() == 0
+
 
