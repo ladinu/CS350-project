@@ -10,7 +10,6 @@ def computeHull(points):
          for k in points:
             det = edge.getDeterminant(k)
             determinants.append(det)
-
          if not containPostiveAndNegativeInts(determinants):
             polygonEdges.append(edge)
 
