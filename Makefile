@@ -14,4 +14,8 @@ point-util-test:
 clean:
 		rm -rf *.pyc
 
+.PHONY: h
+h:
+	python hullDrive.py
+
 .SILENT: clean
