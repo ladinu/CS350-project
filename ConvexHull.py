@@ -6,7 +6,7 @@ class ConvexHull():
 
    vertices = []  #list of points that make up the polygon
 
-   def computeHull(self, points):
+   def computeHull(self, pointsList):
 
    def getVertices(self):
       return vertices
