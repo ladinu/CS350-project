@@ -4,5 +4,10 @@ class ConvexHull():
    def __init__(self):
       pass
 
-   def computeHull(points):
+   vertices = []  #list of points that make up the polygon
+
+   def computeHull(self, points):
+
+   def getVertices(self):
+      return vertices
 
