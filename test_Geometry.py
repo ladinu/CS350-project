@@ -100,5 +100,11 @@ class LineTest(unittest.TestCase):
       self.assertLess(l.getDeterminant(P(3, 1)), 0)
       self.assertGreater(l.getDeterminant(P(3, 3)), 0)
 
+   def testIsPoint(self):
+      l = Line(P(0, 0), P(0, 0))
+      self.assertTrue(l.isPoint())
+      l = Line(P(0, 0), P(0, 1))
+      self.assertFalse(l.isPoint())
+
 if __name__ == '__main__':
    unittest.main()
