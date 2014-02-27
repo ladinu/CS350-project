@@ -59,4 +59,14 @@ class Line(tuple):
    def isPoint(self):
       return self.getDistance() == 0
 
+   def __eq__(self, other):
+      a = [self.startPoint, self.endPoint]
+      b = [other.startPoint, other.endPoint]
+
+      lineEqual = True
+      for i in a:
+         if i not in b:
+            lineEqual = False
+      return lineEqual
+
 
