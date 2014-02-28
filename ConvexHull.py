@@ -3,30 +3,19 @@ from Geometry import Line
 
 def computeHull(points):
    polygonEdges = []
-   for i in points:
-      for j in points:
-         edge = Line(i, j)
-         determinants = []
-         for k in points:
-            det = edge.getDeterminant(k)
-            determinants.append(det)
-         if not containPostiveAndNegativeInts(determinants):
+   for p1 in points:
+      for p2 in points:
+         edge = Line(p1, p2)
+         determinantSigns = []
+         for p in points:
+            if p not in edge:
+               detSign = edge.getDeterminantSign(p)
+               determinantSigns.append(detSign)
+         if not allPositivesAndNegatives(determinantSigns):
             polygonEdges.append(edge)
-
+         print determinantSigns
    return polygonEdges
 
-def containPostiveAndNegativeInts(array):
-   allZerosOrNegatives = True
-   for i in array:
-      if i > 0:
-         allZerosOrNegatives = False
-         break
-   if allZerosOrNegatives:
-      return False
+def allPositivesAndNegatives(array):
+   return (-1 in array and 1 in array)
 
-   allZerosOrPositives = True
-   for i in array:
-      if i < 0:
-         allZerosOrPositives = False
-
-   return not allZerosOrPositives
