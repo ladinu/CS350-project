@@ -66,4 +66,7 @@ class Line(tuple):
             lineEqual = False
       return lineEqual
 
+   def __contains__(self, key):
+      return (key == self.startPoint or key == self.endPoint)
+
 

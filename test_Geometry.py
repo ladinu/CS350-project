@@ -101,14 +101,11 @@ class LineTest(unittest.TestCase):
       l = Line(P(0, 0), P(0, 1))
       self.assertFalse(l.isPoint())
 
-   def testEq(self):
-      l1 = Line(P(1, 3), P(3, 4))
-      l2 = Line(P(4, 3), P(0, 0))
-      l3 = Line(P(0, 0), P(4, 3))
-
-      self.assertTrue(l1 == l1)
-      self.assertTrue(l1 != l2)
-      self.assertTrue(l2 == l3)
+   def testContains(self):
+      l = Line(P(1, 3), P(9, 0))
+      self.assertTrue((P(1, 3) in l))
+      self.assertTrue((P(9, 0) in l))
+      self.assertFalse(P(1, 1) in l)
 
 
 
