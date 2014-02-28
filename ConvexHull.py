@@ -13,7 +13,6 @@ def computeHull(points):
                determinantSigns.append(detSign)
          if not allPositivesAndNegatives(determinantSigns):
             polygonEdges.append(edge)
-         print determinantSigns
    return polygonEdges
 
 def allPositivesAndNegatives(array):
