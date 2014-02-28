@@ -5,6 +5,8 @@ def computeHull(points):
    polygonEdges = []
    for p1 in points:
       for p2 in points:
+         if p1 == p2:
+            break
          edge = Line(p1, p2)
          determinantSigns = []
          for p in points:
