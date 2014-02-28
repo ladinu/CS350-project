@@ -54,11 +54,6 @@ class PointTest(unittest.TestCase):
       self.assertGreaterEqual(p1, p2)
       self.assertGreaterEqual(p2, p2)
 
-   def testIsCollinear(self):
-      p1 = P(1, 1)
-      p2 = P(1, 4)
-      self.assertTrue(P(1, 3).isCollinear(p1, p2))
-
    def testToList(self):
       p1 = P(4, 5)
       self.assertEqual([4, 5], p1.toList())
@@ -94,11 +89,11 @@ class LineTest(unittest.TestCase):
       l = Line(P(0, 0), P(0, 1))
       self.assertEqual(1, l.getDistance())
 
-   def testGetDeterminant(self):
+   def testGetDeterminantSign(self):
       l = Line(P(2, 2), P(3, 2))
-      self.assertEqual(0, l.getDeterminant(P(4, 2)))
-      self.assertLess(l.getDeterminant(P(3, 1)), 0)
-      self.assertGreater(l.getDeterminant(P(3, 3)), 0)
+      self.assertEqual(0, l.getDeterminantSign(P(4, 2)))
+      self.assertLess(l.getDeterminantSign(P(3, 1)), 0)
+      self.assertGreater(l.getDeterminantSign(P(3, 3)), 0)
 
    def testIsPoint(self):
       l = Line(P(0, 0), P(0, 0))
@@ -106,14 +101,11 @@ class LineTest(unittest.TestCase):
       l = Line(P(0, 0), P(0, 1))
       self.assertFalse(l.isPoint())
 
-   def testEq(self):
-      l1 = Line(P(1, 3), P(3, 4))
-      l2 = Line(P(4, 3), P(0, 0))
-      l3 = Line(P(0, 0), P(4, 3))
-
-      self.assertTrue(l1 == l1)
-      self.assertTrue(l1 != l2)
-      self.assertTrue(l2 == l3)
+   def testContains(self):
+      l = Line(P(1, 3), P(9, 0))
+      self.assertTrue((P(1, 3) in l))
+      self.assertTrue((P(9, 0) in l))
+      self.assertFalse(P(1, 1) in l)
 
 
 

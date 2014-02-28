@@ -35,9 +35,6 @@ class Point(tuple):
    def getDistanceFrom(self, other):
       return Line(self, other).getDistance()
 
-   def isCollinear(self, p1, p2):
-      return (0 == Line(p1, p2).getDeterminant(self))
-
    def toList(self):
       return [self.x, self.y]
 
@@ -53,8 +50,8 @@ class Line(tuple):
    def getDistance(self):
       return utils.calculateDistance(self.startPoint, self.endPoint)
 
-   def getDeterminant(self, point):
-      return utils.getDeterminant(self.startPoint, self.endPoint, point)
+   def getDeterminantSign(self, point):
+      return utils.getDeterminantSign(self.startPoint, self.endPoint, point)
 
    def isPoint(self):
       return self.getDistance() == 0
@@ -68,5 +65,8 @@ class Line(tuple):
          if i not in b:
             lineEqual = False
       return lineEqual
+
+   def __contains__(self, key):
+      return (key == self.startPoint or key == self.endPoint)
 
 
