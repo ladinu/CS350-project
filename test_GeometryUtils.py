@@ -31,12 +31,18 @@ class DistanceTest(unittest.TestCase):
       d = calculateDistance(p1, p2, MANHATTAN)
       self.assertEqual(3, d)
 
-   def test_getDeterminant(self):
-      p1 = P(1, 4)
+   def test_getDeterminantSign0(self):
+      p1 = P(4, 2)
       p2 = P(4, 2)
-      p3 = P(0, 0)
-      self.assertTrue(-14, getDeterminant(p1, p2, p3))
-      
+      p3 = P(4, 2)
+      self.assertEqual(0, getDeterminantSign(p1, p2, p3))
+
+   def test_getDeterminantSign1(self):
+      p1 = P(0, 49)
+      p2 = P(10, 1)
+      p3 = P(0, 49)
+      self.assertEqual(-1, getDeterminantSign(p1, p2, p3))
+
 
 if __name__ == '__main__':
    unittest.main()

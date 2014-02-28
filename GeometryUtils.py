@@ -32,3 +32,10 @@ def getDeterminant(p1, p2, p3):
 
    return linalg.det(matrix)
 
+def getDeterminantSign(p1, p2, p3):
+   matrix = [ p1.toList() + [1],
+              p2.toList() + [1],
+              p3.toList() + [1] ]
+
+   return linalg.slogdet(matrix)[0]
+
