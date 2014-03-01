@@ -37,15 +37,21 @@ class QuickHull:
       self._quickHull(p1, farthestPoint, firstHalf)
       #add farthestPoint to the ConvexHull set
       self.convexHullSet.append(farthestPoint)
-      self.verticesCount
+      self.verticesCount += 1
       #solve for otherHalf
       self._quickHull(farthestPoint, p2, otherHalf)
 
    def computeHull(self):
       #start with left-most and right-most points of the set
+      temp = list(self.workingSet)
       self.workingSet.sort()
+
+      assert set(temp) == set(self.workingSet)
+      print "original set: ", temp
+      print "workingSet: ", self.workingSet
       leftMostPoint = self.workingSet[0]
       rightMostPoint = self.workingSet[-1]
+      print "leftMost: ", leftMostPoint, ", rightMost: ", rightMostPoint
       #initiate recursive quickHull()
       self._quickHull(leftMostPoint, rightMostPoint, self.workingSet)
 
