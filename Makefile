@@ -22,4 +22,7 @@ clean:
 h:
 	python hullDrive.py
 
+.PHONY: test
+test: geometry-test geometryUtils-test point-util-test
+
 .SILENT: clean
