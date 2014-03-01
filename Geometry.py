@@ -8,32 +8,13 @@ class Point(tuple):
       return tuple.__new__(cls, (x, y))
 
    def __eq__(self, other):
-      return self._dist(self) == self._dist(other)
+      return (self.x == other.x and self.y == other.y)
 
    def __ne__(self, other):
-      return self._dist(self) != self._dist(other)
-
-   def __lt__(self, other):
-      return self._dist(self) < self._dist(other)
-
-   def __le__(self, other):
-      return self._dist(self) <= self._dist(other)
-
-   def __gt__(self, other):
-      return self._dist(self) > self._dist(other)
-
-   def __ge__(self, other):
-      return self._dist(self) >= self._dist(other)
-
-
-   def _dist(self, point):
-      return point.getDistanceFrom(Point(0, 0))
+      return not (self == other)
 
    x = property(itemgetter(0))
    y = property(itemgetter(1))
-
-   def getDistanceFrom(self, other):
-      return Line(self, other).getDistance()
 
    def toList(self):
       return [self.x, self.y]
@@ -56,17 +37,31 @@ class Line(tuple):
    def isPoint(self):
       return self.getDistance() == 0
 
-   def __eq__(self, other):
-      a = [self.startPoint, self.endPoint]
-      b = [other.startPoint, other.endPoint]
-
-      lineEqual = True
-      for i in a:
-         if i not in b:
-            lineEqual = False
-      return lineEqual
+   def isSameLine(self, other):
+      a, b = (self.startPoint, self.endPoint)
+      c, d = (other.startPoint, other.endPoint)
+      return (a == c and b == d) or (a == d and b == c)
 
    def __contains__(self, key):
       return (key == self.startPoint or key == self.endPoint)
+
+   def __eq__(self, other):
+      return self.getDistance() == other.getDistance()
+
+   def __ne__(self, other):
+      return not self == other
+   
+   def __lt__(self, other):
+      return self.getDistance() < other.getDistance()
+
+   def __le__(self, other):
+      return self.getDistance() <= other.getDistance()
+
+   def __gt__(self, other):
+      return self.getDistance() > other.getDistance()
+
+   def __ge__(self, other):
+      return self.getDistance() >= other.getDistance()
+
 
 

@@ -10,6 +10,10 @@ geometryUtils-test:
 point-util-test:
 	python test_PointUtils.py
 
+.PHONY: convexhull-test
+convexhull-test:
+	python test_ConvexHull.py
+
 .PHONY: clean
 clean:
 		rm -rf *.pyc
@@ -17,5 +21,8 @@ clean:
 .PHONY: h
 h:
 	python hullDrive.py
+
+.PHONY: test
+test: geometry-test geometryUtils-test point-util-test
 
 .SILENT: clean
