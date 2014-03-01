@@ -10,6 +10,10 @@ geometryUtils-test:
 point-util-test:
 	python test_PointUtils.py
 
+.PHONY: convexhull-test
+convexhull-test:
+	python test_ConvexHull.py
+
 .PHONY: clean
 clean:
 		rm -rf *.pyc
