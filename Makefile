@@ -16,7 +16,7 @@ convexhull-test:
 
 .PHONY: clean
 clean:
-		rm -rf *.pyc
+		find . -name "*.pyc" -delete
 
 .PHONY: h
 h:
