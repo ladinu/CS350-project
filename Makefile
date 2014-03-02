@@ -16,6 +16,9 @@ geometry-test: geometry-line-test geometry-point-test geometry-utils-test
 .PHONY: test
 test: geometry-test 
 
+.PHONY: h
+h:
+	python -m bin.hullDrive.py
 
 .PHONY: clean
 clean:
