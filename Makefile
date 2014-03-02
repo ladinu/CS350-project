@@ -1,28 +1,25 @@
+.PHONY: geometry-line-test
+geometry-line-test:
+	python -m geometry.tests.Line_test
+
+.PHONY: geometry-point-test
+geometry-point-test:
+	python -m geometry.tests.Point_test
+
+.PHONY: geometry-utils-test
+geometry-utils-test:
+	python -m geometry.tests.utils_test
+
 .PHONY: geometry-test
-geometry-test:
-	python test_Geometry.py
+geometry-test: geometry-line-test geometry-point-test geometry-utils-test
 
-.PHONY: geometryUtils-test
-geometryUtils-test:
-	python test_GeometryUtils.py
+.PHONY: test
+test: geometry-test 
 
-.PHONY: point-util-test
-point-util-test:
-	python test_PointUtils.py
-
-.PHONY: convexhull-test
-convexhull-test:
-	python test_ConvexHull.py
 
 .PHONY: clean
 clean:
 		find . -name "*.pyc" -delete
 
-.PHONY: h
-h:
-	python hullDrive.py
-
-.PHONY: test
-test: geometry-test geometryUtils-test point-util-test
 
 .SILENT: clean
