@@ -52,60 +52,31 @@ class LineTest(unittest.TestCase):
       self.assertTrue((P(9, 0) in l))
       self.assertFalse(P(1, 1) in l)
 
-   def testisSameLine(self):
+   def testEq(self):
       l1 = Line(P(0, 0), P(-1, -1))
       l2 = Line(P(0, 0), P(-1, -1))
       l3 = Line(P(0, 0), P(1, 1))
       l4 = Line(P(1, 1), P(0, 0))
       l5 = Line(P(0, 0), P(0, 0))
 
-      self.assertTrue(l1.isSameLine(l2))
-      self.assertTrue(l2.isSameLine(l1))
+      self.assertTrue(l1 == l2)
+      self.assertTrue(l2 == l1)
 
-      self.assertTrue(l3.isSameLine(l4))
-      self.assertTrue(l4.isSameLine(l3))
-
-      self.assertFalse(l1.isSameLine(l3))
-      self.assertFalse(l3.isSameLine(l1))
-
-      self.assertFalse(l1.isSameLine(l5))
-      self.assertFalse(l5.isSameLine(l1))
-
-   def testEq(self):
-      l1 = Line(P(0, 0), P(-1, -1))
-      l2 = Line(P(0, 0), P(1, 1))
-      self.assertEqual(l1, l1)
-      self.assertEqual(l1, l2)
-      self.assertEqual(l2, l1)
+      self.assertTrue(l3 == l4)
+      self.assertTrue(l4 == l3)
 
    def testNe(self):
       l1 = Line(P(0, 0), P(-1, -1))
-      l2 = Line(P(0, 1), P(1, 1))
-      self.assertNotEqual(l1, l2)
-      self.assertNotEqual(l2, l1)
+      l2 = Line(P(0, 0), P(-1, -1))
+      l3 = Line(P(0, 0), P(1, 1))
+      l4 = Line(P(1, 1), P(0, 0))
+      l5 = Line(P(0, 0), P(0, 0))
 
-   def testLt(self):
-      l1 = Line(P(0, 0), P(1, 1))
-      l2 = Line(P(0, 0), P(1, -2))
-      self.assertLess(l1, l2)
+      self.assertTrue(l1 != l3)
+      self.assertTrue(l3 != l1)
 
-   def testLe(self):
-      l1 = Line(P(0, 0), P(1, 1))
-      l2 = Line(P(0, 0), P(1, -2))
-      self.assertLessEqual(l1, l1)
-      self.assertLessEqual(l1, l2)
-
-   def testGt(self):
-      l1 = Line(P(0, 0), P(1, -2))
-      l2 = Line(P(0, 0), P(1, 1))
-      self.assertGreater(l1, l2)
-
-   def testGe(self):
-      l1 = Line(P(0, 0), P(1, -2))
-      l2 = Line(P(0, 0), P(1, 1))
-
-      self.assertGreaterEqual(l1, l2)
-      self.assertGreaterEqual(l2, l2)
+      self.assertTrue(l1 != l5)
+      self.assertTrue(l5 != l1)
 
 if __name__ == '__main__':
    unittest.main()

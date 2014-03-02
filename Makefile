@@ -18,7 +18,7 @@ test: geometry-test
 
 .PHONY: h
 h:
-	python -m bin.hullDrive.py
+	python run.py
 
 .PHONY: clean
 clean:
