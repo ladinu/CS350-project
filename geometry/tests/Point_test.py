@@ -1,7 +1,7 @@
 import unittest
 from math import sqrt
-from Geometry import Point as P
-from Geometry import Line
+from ..Point import Point as P
+from ..Line import Line
 
 class PointTest(unittest.TestCase):
 
