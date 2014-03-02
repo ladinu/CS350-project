@@ -1,4 +1,4 @@
-from algorithms import BruteForceHull
+import BruteForceHull
 from geometry.utils import *
 import matplotlib.pyplot as plt
 
