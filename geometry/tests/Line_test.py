@@ -46,6 +46,11 @@ class LineTest(unittest.TestCase):
       l = Line(P(0, 0), P(0, 1))
       self.assertFalse(l.isPoint())
 
+   def testToList(self):
+      l = Line(P(0, 0), P(0, 0))
+      expected = [[0, 0], [0, 0]]
+      self.assertEqual(l.toList(), expected)
+
    def testContains(self):
       l = Line(P(1, 3), P(9, 0))
       self.assertTrue((P(1, 3) in l))

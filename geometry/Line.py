@@ -20,6 +20,9 @@ class Line(tuple):
    def isPoint(self):
       return self.getDistance() == 0
 
+   def toList(self):
+      return [self.startPoint.toList(), self.endPoint.toList()]
+
    def __contains__(self, key):
       return (key == self.startPoint or key == self.endPoint)
 

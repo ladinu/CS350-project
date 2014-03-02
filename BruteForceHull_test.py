@@ -1,4 +1,6 @@
 import unittest
+import itertools
+import numpy as np
 from BruteForceHull import computeHull
 from geometry.utils import *
 from geometry.Point import Point as P
@@ -12,9 +14,9 @@ class BruteForceHullTest(unittest.TestCase):
       point = getRandomPoint()
       vertices = computeHull([point])
       line = Line(point, point)
-      vertices = unique(computeHull([point]))
+      vertices = computeHull([point])
       self.assertEqual(1, len(vertices))
-      self.assertTrue(line.isSameLine(vertices[0]))
+      self.assertTrue(line == vertices[0])
 
    def testOneLine(self):
       pointA = getRandomPoint()
@@ -25,47 +27,26 @@ class BruteForceHullTest(unittest.TestCase):
       self.assertEqual(1, len(vertices))
       self.assertTrue(vertices[0] == line)
 
-   @unittest.skip("broken")
-   def test_Triangle(self):
-      pointA = P(0, 0)
-      pointB = P(0, 5)
-      pointC = P(5, 0)
-      triangle = [pointA, pointB, pointC]
-      bruteConvex = [i.toList() for i in computeHull(triangle)]
-      pyhullConvex = pyConvexHull(triangle)
-      #compare using sets(list) because order might be different
-      self.assertTrue(sameList(bruteConvex, pyhullConvex.vertices))
+   def testTriangle(self):
+      triangle = [P(0, 0),  P(0, 5), P(5, 0)]
+      vertices = unique(computeHull(triangle))
+      self.assertTrue(len(vertices), 3)
 
-   @unittest.skip("broken")
-   def test_randomListPoints(self):
-      randomPoints = getNRandomPoints(10)
-      bruteConvex = computeHull(randomPoints)
-      pyhullConvex = convex_hull.Convexhull(randomPoints)
-      #compare using sets(list) because order might be different
-      self.assertTrue(set(bruteConvex.getVertices()) == set(pyhullConvex.vertices()))
-
+   def testTriangleWithPointsInside(self):
+      triangle = [P(0, 0),  P(0, 5), P(5, 0), P(1, 1)]
+      vertices = unique(computeHull(triangle))
+      self.assertTrue(len(vertices), 3)
+      for v in vertices:
+         self.assertTrue(v.startPoint != P(1, 1))
+         self.assertTrue(v.endPoint != P(1, 1))
 
 def unique(vertices):
    retv = []
-   print vertices
    for v in vertices:
-      add = True
-      for i in vertices:
-         if v.isSameLine(i):
-            add = False
-      if add:
+      if not v.isPoint() and v not in retv:
          retv.append(v)
-   print retv
    return retv
 
-def sameList(listA, listB):
-   for a in listA:
-      if a not in listB:
-         return False
-   for b in listB:
-      if b not in listA:
-         return False
-   return True
 
 if __name__ == '__main__':
    unittest.main()
