@@ -1,7 +1,7 @@
 from math import sqrt, fabs
 import random
 
-import Point as P
+from Point import Point as P
 
 EUCLIDEAN = 0
 MANHATTAN = 1
