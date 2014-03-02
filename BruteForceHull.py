@@ -1,5 +1,4 @@
-from Geometry import Point
-from Geometry import Line
+from geometry.Line import Line
 
 def computeHull(points):
    polygonEdges = []
