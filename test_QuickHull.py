@@ -29,7 +29,6 @@ def getEdges(vertices):
 
 def main():
    workingSet = getNRandomPoints(10, 0, 50)
-   print("Size of workingSet = " 'len(workingSet)')
    p1, p2 = _flatten(workingSet)
 
    plt.plot(p1, p2, 'o')
