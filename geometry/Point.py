@@ -1,5 +1,4 @@
 from operator import itemgetter
-import GeometryUtils as utils
 
 class Point(tuple):
    __slots__ = []
