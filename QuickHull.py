@@ -12,8 +12,17 @@ class QuickHull:
       return (a.x - b.x) * (somePoint.y - b.y) - (somePoint.x - b.x) * (a.y - b.y) > 0
 
    def _getFarthestPoint(self, a, b, setOfPoints):
-      sortedPoints = sorted(setOfPoints)
-      return sortedPoints[-1]
+      currentDist = 0.0
+      maxDistance = -1.0
+      maxPoint = None
+      for i in setOfPoints:
+         if i is a or i is b:
+            continue
+         currentDist = max(Line(a, i).getDistance(), Line(b, i).getDistance())
+         if currentDist > maxDistance:
+            maxDistance = currentDist
+            maxPoint = i
+      return maxPoint
 
    def _quickHull(self, p1, p2, subset):
       numPoints = len(subset)
@@ -41,6 +50,19 @@ class QuickHull:
       #solve for otherHalf
       self._quickHull(farthestPoint, p2, otherHalf)
 
+   def _getLeftandRightMost(self, setOfPoints):
+      itrtr = lIndex = rIndex = 0
+      points = setOfPoints
+      for i in points:
+         pointL = points[lIndex]
+         pointR = points[rIndex]
+         if((pointR.x < i.x)):
+            rIndex = itrtr
+         if((pointL.x > i.x)):
+            lIndex = itrtr
+         itrtr += 1
+      return [setOfPoints[lIndex], setOfPoints[rIndex]]
+
    def computeHull(self):
       #start with left-most and right-most points of the set
       temp = list(self.workingSet)
@@ -49,9 +71,13 @@ class QuickHull:
       assert set(temp) == set(self.workingSet)
       print "original set: ", temp
       print "workingSet: ", self.workingSet
-      leftMostPoint = self.workingSet[0]
-      rightMostPoint = self.workingSet[-1]
+
+      #get left-most and right-most points:
+      extremeties = self._getLeftandRightMost(self.workingSet)
+      leftMostPoint = extremeties[0]
+      rightMostPoint = extremeties[1]
       print "leftMost: ", leftMostPoint, ", rightMost: ", rightMostPoint
+
       #initiate recursive quickHull()
       self._quickHull(leftMostPoint, rightMostPoint, self.workingSet)
 

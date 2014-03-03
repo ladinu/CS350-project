@@ -38,6 +38,7 @@ def main():
    testSet.computeHull()
    vertices = testSet.getVertices()
    polygon = getEdges(vertices)
+   print "Vertices: ", sorted(vertices)
    print "Edges: ", sorted(polygon)
    for s in polygon:
       x1 = s.startPoint.x
