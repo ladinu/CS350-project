@@ -4,6 +4,7 @@ from GeometryUtils import *
 from PointUtils import *
 import matplotlib.pyplot as plt
 
+P = Point
 def flatten(points):
    xList = []
    yList = []
@@ -12,12 +13,14 @@ def flatten(points):
       yList.append(p.y)
    return (xList, yList)
 
-points = getNRandomPoints(10, 0, 50)
+points = getNRandomPoints(50, 0, 50)
+#points = [P(45, 9), P(13, 49), P(42, 1), P(49, 13)]
 p1, p2 = flatten(points)
 
 plt.plot(p1, p2, 'o')
 plt.axis([-10, 60, -10, 60])
 
+print points
 simplices = ConvexHull.computeHull(points)
 print simplices
 for s in simplices:

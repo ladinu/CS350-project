@@ -26,9 +26,13 @@ def calculateManhattanDistance(p1, p2):
    return x_diff + y_diff
 
 def getDeterminantSign(p1, p2, p3):
-   matrix = [ p1.toList() + [1],
-              p2.toList() + [1],
-              p3.toList() + [1] ]
+   p = p1.toList() + [1]
+   q = p2.toList() + [1]
+   r = p3.toList() + [1]
 
-   return linalg.slogdet(matrix)[0]
+   # Using Sarrus' scheme
+   sum1 = q[0]*r[1] + p[0]*q[1] + r[0]*p[1]
+   sum2 = q[0]*p[1] + r[0]*q[1] + p[0]*r[1]
+
+   return cmp(sum1 - sum2, 0)
 

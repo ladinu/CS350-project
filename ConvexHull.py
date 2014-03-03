@@ -5,14 +5,11 @@ def computeHull(points):
    polygonEdges = []
    for p1 in points:
       for p2 in points:
-         if p1 == p2:
-            break
          edge = Line(p1, p2)
          determinantSigns = []
          for p in points:
-            if p not in edge:
-               detSign = edge.getDeterminantSign(p)
-               determinantSigns.append(detSign)
+            detSign = edge.getDeterminantSign(p)
+            determinantSigns.append(detSign)
          if not allPositivesAndNegatives(determinantSigns):
             polygonEdges.append(edge)
    return polygonEdges

@@ -41,6 +41,12 @@ class DistanceTest(unittest.TestCase):
       p1 = P(0, 49)
       p2 = P(10, 1)
       p3 = P(0, 49)
+      self.assertEqual(0, getDeterminantSign(p1, p2, p3))
+
+   def test_getDeterminantSign2(self):
+      p1 = P(0, 49)
+      p2 = P(10, 1)
+      p3 = P(0, 45)
       self.assertEqual(-1, getDeterminantSign(p1, p2, p3))
 
 
