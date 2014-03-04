@@ -3,9 +3,9 @@ from Geometry import Line
 
 class QuickHull:
    def __init__(self, setOfPoints):
-      self.pointsCount = 0
+      self.pointsCount = len(setOfPoints)
       self.verticesCount = 0
-      self.workingSet = setOfPoints
+      self.workingSet = list(setOfPoints)
       self.convexHullSet = []
 
    def _isRightOf(self, a, b, somePoint):
@@ -63,13 +63,24 @@ class QuickHull:
          itrtr += 1
       return [setOfPoints[lIndex], setOfPoints[rIndex]]
 
-   def computeHull(self):
-      #start with left-most and right-most points of the set
-      temp = list(self.workingSet)
-      self.workingSet.sort()
+   def _getUpperAndLowerHalf(self, setOfPoints, leftMost, rightMost):
+      if len(setOfPoints) < 2:
+         return None
+      upper = []
+      lower = []
+      for i in setOfPoints:
+         if (i is leftMost or i is rightMost):
+            continue
+         if self._isRightOf(rightMost, leftMost, i):
+            upper.append(i)
+         else:
+            lower.append(i)
+      return [upper, lower]
 
-      assert set(temp) == set(self.workingSet)
-      print "original set: ", temp
+   def computeHull(self):
+      if self.pointsCount < 2:
+         return
+      #start with left-most and right-most points of the set
       print "workingSet: ", self.workingSet
 
       #get left-most and right-most points:
@@ -78,8 +89,17 @@ class QuickHull:
       rightMostPoint = extremeties[1]
       print "leftMost: ", leftMostPoint, ", rightMost: ", rightMostPoint
 
+      temp = self._getUpperAndLowerHalf(self.workingSet, leftMostPoint, rightMostPoint)
+      upper = temp[0]
+      lower = temp[1]
+      print "upper-half size: ", len(upper), "lower-half size: ", len(lower)
       #initiate recursive quickHull()
-      self._quickHull(leftMostPoint, rightMostPoint, self.workingSet)
+      self.convexHullSet.append(rightMostPoint)
+      self.verticesCount += 1
+      self._quickHull(rightMostPoint, leftMostPoint, upper)
+      self.convexHullSet.append(leftMostPoint)
+      self.verticesCount += 1
+      self._quickHull(leftMostPoint, rightMostPoint, lower)
 
    def getVertices(self):
       if self.verticesCount < 1:
