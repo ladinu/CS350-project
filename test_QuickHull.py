@@ -28,7 +28,8 @@ def getEdges(vertices):
    return listOfEdges
 
 def main():
-   workingSet = getNRandomPoints(10, 0, 50)
+   #workingSet = [P(20,20), P(40, 20), P(30, 20), P(30, 40), P(30, 1)]
+   workingSet = getNRandomPoints(25, 0, 50)
    p1, p2 = _flatten(workingSet)
 
    plt.plot(p1, p2, 'o')
@@ -37,7 +38,7 @@ def main():
    testSet = QuickHull(workingSet)
    testSet.computeHull()
    vertices = testSet.getVertices()
-   polygon = getEdges(vertices)
+   polygon = getEdges(sorted(vertices))
    print "Vertices: ", sorted(vertices)
    print "Edges: ", sorted(polygon)
    for s in polygon:
