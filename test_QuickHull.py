@@ -41,13 +41,13 @@ def main():
    polygon = getEdges(sorted(vertices))
    print "Vertices: ", sorted(vertices)
    print "Edges: ", sorted(polygon)
-   for s in polygon:
-      x1 = s.startPoint.x
-      x2 = s.endPoint.x
-      y1 = s.startPoint.y
-      y2 = s.endPoint.y
-      plt.plot([x1, x2], [y1, y2], '-k')
 
+   #plot set of vertices
+   i = 0
+   while i < len(vertices)-1:
+      plt.plot([vertices[i][0], vertices[i+1][0]], [vertices[i][1], vertices[i+1][1]], '-k')
+      i = i + 1
+   plt.plot([vertices[-1][0], vertices[0][0]], [vertices[-1][1], vertices[0][1]], '-k')
    plt.show()
 
 if __name__=='__main__':
