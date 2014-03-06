@@ -11,25 +11,33 @@ def _flatten(points):
       yList.append(p.y)
    return (xList, yList)
 
-def getEdges(vertices):
-   size = len(vertices)
-   if size < 1:
-      return None
-   elif size == 1:
-      return list(Line(vertices[0]))
-   temp = sorted(vertices)
-   startingPoint = temp[0]
-   listOfEdges = []
-   for i in range(1, size):
-      if i+1 < size and temp[i+1] == startingPoint:
-         listOfEdges.append(Line(temp[i], startingPoint))
+def getCirclePoints(centerX, centerY, radius):
+   x = radius
+   y = 0
+   radiusError = 1 - x
+   circle = []
+   while(x >= y):
+      circle.append(Point(x + centerX, y + centerY))
+      circle.append(Point(y + centerX, x + centerY))
+      circle.append(Point(-x + centerX, y + centerY))
+      circle.append(Point(-y + centerX, x + centerY))
+      circle.append(Point(-x + centerX, -y + centerY))
+      circle.append(Point(-y + centerX, -x + centerY))
+      circle.append(Point(x + centerX, -y + centerY))
+      circle.append(Point(y + centerX, -x + centerY))
+      y += 1
+      if (radiusError<0):
+         radiusError += 2 * y + 1
       else:
-         listOfEdges.append(Line(temp[i-1], temp[i]))
-   return listOfEdges
+         x -= 1
+         radiusError += 2 * (y - x + 1)
+   return circle
 
 def main():
    #workingSet = [P(20,20), P(40, 20), P(30, 20), P(30, 40), P(30, 1)]
-   workingSet = getNRandomPoints(25, 0, 50)
+   workingSet = getNRandomPoints(35, 0, 50)
+   #workingSet = getCirclePoints(25, 25, 20)
+   print "Points Set: ", workingSet
    p1, p2 = _flatten(workingSet)
 
    plt.plot(p1, p2, 'o')
@@ -38,16 +46,13 @@ def main():
    testSet = QuickHull(workingSet)
    testSet.computeHull()
    vertices = testSet.getVertices()
-   polygon = getEdges(sorted(vertices))
    print "Vertices: ", sorted(vertices)
-   print "Edges: ", sorted(polygon)
+   edges = testSet.getEdges()
+   print "Edges: ", sorted(edges)
 
-   #plot set of vertices
-   i = 0
-   while i < len(vertices)-1:
-      plt.plot([vertices[i][0], vertices[i+1][0]], [vertices[i][1], vertices[i+1][1]], '-k')
-      i = i + 1
-   plt.plot([vertices[-1][0], vertices[0][0]], [vertices[-1][1], vertices[0][1]], '-k')
+   #plot set of vertices as edges
+   for e in edges:
+      plt.plot(e.startPoint, e.endPoint, '-k')
    plt.show()
 
 if __name__=='__main__':
