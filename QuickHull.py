@@ -13,13 +13,11 @@ class QuickHull:
       return (a.x - b.x) * (somePoint.y - b.y) - (somePoint.x - b.x) * (a.y - b.y)
 
 
-#   def _getDistance(int a, int b, int p)
-#      x, y, u
-#      u = ((p.x - a.x)*(b.x - (float)xPoints[a]) + ((float)yPoints[p] - (float)yPoints[a])*((float)yPoints[b] - (float)yPoints[a]))
-#          / (((float)xPoints[b] - (float)xPoints[a])*((float)xPoints[b] - (float)xPoints[a]) + ((float)yPoints[b] - (float)yPoints[a])*((float)yPoints[b] - (float)yPoints[a]));
-#      x = (float)xPoints[a] + u * ((float)xPoints[b] - (float)xPoints[a]);
-#      y = (float)yPoints[a] + u * ((float)yPoints[b] - (float)yPoints[a]);
-#      return ((x - (float)xPoints[p])*(x - (float)xPoints[p]) + (y - (float)yPoints[p])*(y - (float)yPoints[p]));
+   def _getDistance(self, a, b, p):
+      u = ((p.x - a.x)*(b.x - a.x) + (p.y - a.y)*(b.y - a.y)) / ((b.x - a.x)*(b.x - a.x) + (b.y - a.y)*(b.y - a.y))
+      x = a.x + u * (b.x - a.x)
+      y = a.y + u * (b.y - a.y)
+      return (x - p.x)*(x - p.x) + (y - p.y)*(y - p.y)
 
    def _getFarthestPoint(self, a, b, setOfPoints):
       currentDist = 0.0
@@ -28,7 +26,7 @@ class QuickHull:
       for i in setOfPoints:
          if i is a or i is b:
             continue
-         currentDist = max(Line(a, i).getDistance(), Line(b, i).getDistance())
+         currentDist = self._getDistance(a, b, i)
          if currentDist > maxDistance:
             maxDistance = currentDist
             maxPoint = i
