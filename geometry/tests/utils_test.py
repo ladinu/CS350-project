@@ -1,6 +1,7 @@
 import unittest
-from math import sqrt
+from math import sqrt, ceil
 from ..Point import Point as P
+from ..Line import Line
 from ..utils import *
 
 class UtilsTest(unittest.TestCase):
@@ -54,6 +55,14 @@ class UtilsTest(unittest.TestCase):
       bottomRight = bounds[1]
       self.assertTrue(P(-size, size) == topLeft)
       self.assertTrue(P(size, -size))
+
+   def test_getCircle(self):
+      radius = 10
+      circle = getCircle(radius, 50)
+      self.assertEqual(50, len(circle))
+      for p in circle:
+         line = Line(p, P(0, 0))
+         self.assertTrue( fabs(radius - line.getDistance()) < 0.5)
 
    def test_SamePoint(self):
       d = calculateDistance(P(4, 2), P(4, 2))

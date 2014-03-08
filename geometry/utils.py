@@ -1,4 +1,4 @@
-from math import sqrt, fabs
+from math import sqrt, fabs, pi, cos, sin
 import random
 
 from Point import Point as P
@@ -15,11 +15,19 @@ def getNRandomPoints(n=10, low=0, high=10):
       points.append(getRandomPoint(low, high))
    return points
 
+def getCircle(radius, count):
+   points = []
+   for i in range(count):
+      randAngle = random.random()*pi*2
+      x = cos(randAngle)*radius
+      y = sin(randAngle)*radius
+      points.append(P(x, y))
+   return points
+
 def getSquareEnclosingPoint(point, squareSize=5):
    p1 = P(point.x - squareSize, point.y + squareSize)
    p2 = P(point.x + squareSize, point.y - squareSize)
    return (p1, p2)
-
 
 def calculateDistance(p1, p2):
    x_diff = p2.x - p1.x
