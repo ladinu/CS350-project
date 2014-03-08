@@ -1,3 +1,4 @@
+from QuickHull import QuickHull
 import BruteForceHull
 from geometry.utils import *
 import matplotlib.pyplot as plt
@@ -10,16 +11,13 @@ def flatten(points):
       yList.append(p.y)
    return (xList, yList)
 
-
-def main():
-   points = getNRandomPoints(50, 0, 50)
-   #points = [P(45, 9), P(13, 49), P(42, 1), P(49, 13)]
+def plotBruteForceHull():
+   points = getNRandomPoints(100, 0, 50)
    p1, p2 = flatten(points)
 
    plt.plot(p1, p2, 'o')
    plt.axis([-10, 60, -10, 60])
 
-   print points
    simplices = BruteForceHull.computeHull(points)
    for s in simplices:
       x1 = s.startPoint.x
@@ -31,5 +29,20 @@ def main():
 
    plt.show()
 
+def plotQuickHull():
+   points = getNRandomPoints(100, 0, 50)
+   p1, p2 = flatten(points)
+
+   plt.plot(p1, p2, 'o')
+   plt.axis([-10, 60, -10, 60])
+
+   qh = QuickHull(points)
+   qh.computeHull()
+
+   for e in qh.getEdges():
+      plt.plot(e.startPoint, e.endPoint, '--k')
+   plt.show()
+
 if __name__ == '__main__':
-   main()
+  plotQuickHull()
+  #plotBruteForceHull()
