@@ -3,9 +3,6 @@ import random
 
 from Point import Point as P
 
-EUCLIDEAN = 0
-MANHATTAN = 1
-
 def getRandomPoint(low=0, high=10):
    x = random.randint(low, high)
    y = random.randint(low, high)
@@ -24,26 +21,10 @@ def getSquareEnclosingPoint(point, squareSize=5):
    return (p1, p2)
 
 
-class DistanceException(Exception):
-   pass
-
-def calculateDistance(p1, p2, distanceType=EUCLIDEAN):
-   if distanceType == EUCLIDEAN:
-      return calculateEuclideanDistance(p1, p2)
-   elif distanceType == MANHATTAN:
-      return calculateManhattanDistance(p1, p2)
-   else:
-      raise DistanceException("invalid distance type")
-
-def calculateEuclideanDistance(p1, p2):
+def calculateDistance(p1, p2):
    x_diff = p2.x - p1.x
    y_diff = p2.y - p1.y
    return sqrt(pow(x_diff, 2) + pow(y_diff, 2))
-
-def calculateManhattanDistance(p1, p2):
-   x_diff = fabs(p1.x - p2.x)
-   y_diff = fabs(p1.y - p2.y)
-   return x_diff + y_diff
 
 def getDeterminantSign(p1, p2, p3):
    p = p1.toList() + [1]

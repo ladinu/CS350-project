@@ -63,23 +63,11 @@ class UtilsTest(unittest.TestCase):
       d = calculateDistance(P(1, 3), P(4, 2))
       self.assertEqual(sqrt(10), d)
 
-   def test_InvalidDistanceType(self):
+   def test_CalculateDistance(self):
       p1 = P(3, 4)
       p2 = P(1, 3)
-      self.assertRaises(
-            DistanceException, lambda: calculateDistance(p1, p2, "NONE"))
-
-   def test_EuclideanDistanceType(self):
-      p1 = P(3, 4)
-      p2 = P(1, 3)
-      d = calculateDistance(p1, p2, EUCLIDEAN)
+      d = calculateDistance(p1, p2)
       self.assertEqual(sqrt(5), d)
-
-   def test_ManhattanDistnaceType(self):
-      p1 = P(3, 4)
-      p2 = P(1, 3)
-      d = calculateDistance(p1, p2, MANHATTAN)
-      self.assertEqual(3, d)
 
    def test_getDeterminantSign0(self):
       p1 = P(4, 2)
