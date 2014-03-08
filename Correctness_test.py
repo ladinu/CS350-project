@@ -5,7 +5,7 @@ from geometry.Point import Point as P
 from geometry.utils import *
 
 import BruteForceHull
-
+from QuickHull import QuickHull
 
 def getStartAndEndPoint(simplex):
    p1x = simplex.coords[0][0]
@@ -83,19 +83,37 @@ def sameList(listA, listB):
 
    return True
 
-
-if __name__ == '__main__':
-   r = [P(9, 0), P(3, 0), P(1, 0), P(10, 8), P(2, 0)]
-
-   for i in range(3, 100):
-      print "> Running test with %i points" % i
-      r = getNRandomPoints(i)
+def testBruteForceHull():
+   print "> Running BruteForce tests..."
+   high = 50
+   for i in range(3, 50):
+      print "  Test %i/%i" % (i, high)
+      r = getNRandomPoints(i, -10000, 10000)
       simplices = ConvexHull(r).simplices
 
-      points = convertEdgesToPoints((BruteForceHull.computeHull(r)))
+      points = convertEdgesToPoints(BruteForceHull.computeHull(r))
       points = filterDuplicateLinesOnHull(convertSimplicesToLines(simplices), points)
 
       if not sameList(points, convertToPoints(simplices)):
          print "[!] INCORRECT RESULT", r
          exit(1)
-         
+
+def testQuickHull():
+   print "> Running QuickHull tests..."
+   high = 1000
+   for i in range(3, high):
+      print "  Test %i/%i" % (i, high)
+      r = getNRandomPoints(i, -10000, 10000)
+      simplices = ConvexHull(r).simplices
+
+      qh = QuickHull(r)
+      qh.computeHull()
+      points = filterDuplicateLinesOnHull(convertSimplicesToLines(simplices), qh.convexHullSet)
+
+      if not sameList(points, convertToPoints(simplices)):
+         print "[!] INCORRECT RESULT", r
+         exit(1)
+
+if __name__ == '__main__':
+   testBruteForceHull()
+   testQuickHull()
