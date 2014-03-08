@@ -12,7 +12,7 @@ def flatten(points):
 
 
 def main():
-   points = getNRandomPoints(50, 0, 50)
+   points = getNRandomPoints(100, 0, 50)
    #points = [P(45, 9), P(13, 49), P(42, 1), P(49, 13)]
    p1, p2 = flatten(points)
 

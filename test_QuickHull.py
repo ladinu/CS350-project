@@ -1,7 +1,6 @@
-from Geometry import *
+from geometry.utils import *
 from QuickHull import QuickHull
 import matplotlib.pyplot as plt
-from PointUtils import *
 
 def _flatten(points):
    xList = []
@@ -35,7 +34,7 @@ def getCirclePoints(centerX, centerY, radius):
 
 def main():
    #workingSet = [P(20,20), P(40, 20), P(30, 20), P(30, 40), P(30, 1)]
-   workingSet = getNRandomPoints(35, 0, 50)
+   workingSet = getNRandomPoints(100, 0, 50)
    #workingSet = getCirclePoints(25, 25, 20)
    print "Points Set: ", workingSet
    p1, p2 = _flatten(workingSet)

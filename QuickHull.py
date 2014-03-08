@@ -1,5 +1,5 @@
-from Geometry import Point
-from Geometry import Line
+from geometry.Point import Point
+from geometry.Line import Line
 
 class QuickHull:
    #initialize fields
